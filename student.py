@@ -1,54 +1,55 @@
 import sys
-def calculate_grade(avg):
-    if 90 <= avg <= 100:
-        return "S"
-    elif 80 <= avg < 90:
-        return "A"
-    elif 65 <= avg < 80:
-        return "B"
-    elif 50 <= avg < 65:
-        return "C"
-    elif 40 <= avg < 50:
-        return "D"
-    else:
-        return "F"
+import io
+from student import calculate_grade, main
 
-def print_grade_table():
-    print("===== GRADING CRITERIA =====")
-    print("+------------+---------+")
-    print("| Marks (%)  | Grade   |")
-    print("+------------+---------+")
-    print("| 90 - 100   |   S     |")
-    print("| 80 - 89    |   A     |")
-    print("| 65 - 79    |   B     |")
-    print("| 50 - 64    |   C     |")
-    print("| 40 - 49    |   D     |")
-    print("| Below 40   |   F     |")
-    print("+------------+---------+")
 
-def main():
-    if len(sys.argv) != 7:
-        print("Usage: python Student.py <name> <department> <semester> <m1> <m2> <m3>")
-        sys.exit(1)
+# 🔹 Test grade calculation logic
+def test_grade_S():
+    assert calculate_grade(95) == "S"
 
-    name = sys.argv[1]
-    department = sys.argv[2]
-    semester = sys.argv[3]
-    marks1 = int(sys.argv[4])
-    marks2 = int(sys.argv[5])
-    marks3 = int(sys.argv[6])
+def test_grade_A():
+    assert calculate_grade(85) == "A"
 
-    average = (marks1 + marks2 + marks3) / 3
-    grade = calculate_grade(average)
+def test_grade_B():
+    assert calculate_grade(70) == "B"
 
-    print_grade_table()
+def test_grade_C():
+    assert calculate_grade(55) == "C"
 
-    print("\n===== STUDENT DETAILS =====")
-    print(f"Name       : {name}")
-    print(f"Department : {department}")
-    print(f"Semester   : {semester}")
-    print(f"Average    : {average:.2f}")
-    print(f"Grade      : {grade}")
+def test_grade_D():
+    assert calculate_grade(45) == "D"
 
-if __name__ == "__main__":
+def test_grade_F():
+    assert calculate_grade(30) == "F"
+
+
+# 🔹 Test main program output using pytest capsys
+def test_main_output(capsys, monkeypatch):
+    test_args = [
+        "student.py",
+        "swapna",
+        "ICA",
+        "3",
+        "85",
+        "78",
+        "90"
+    ]
+
+    # Mock command-line arguments
+    monkeypatch.setattr(sys, "argv", test_args)
+
+    # Run main program
     main()
+
+    # Capture output
+    captured = capsys.readouterr()
+    output = captured.out
+
+    # ✅ Assertions
+    assert "GRADING CRITERIA" in output
+    assert "STUDENT DETAILS" in output
+    assert "Name       : swapna" in output
+    assert "Department : ICA" in output
+    assert "Semester   : 3" in output
+    assert "Average    : 84.33" in output
+    assert "Grade      : A" in output
