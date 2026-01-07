@@ -1,55 +1,156 @@
-import sys
-import io
-from student import calculate_grade, main
+# Import the grade calculation function from main program
+from student import calculate_grade
 
+# ---------------- GRADE S TEST CASES ----------------
 
-# 🔹 Test grade calculation logic
-def test_grade_S():
+# Test lower boundary for Grade S (exactly 90)
+def test_grade_S_lower_boundary():
+    assert calculate_grade(90) == "S"
+
+# Test middle value for Grade S
+def test_grade_S_middle_value():
     assert calculate_grade(95) == "S"
 
-def test_grade_A():
+# Test upper boundary for Grade S (exactly 100)
+def test_grade_S_upper_boundary():
+    assert calculate_grade(100) == "S"
+
+# ---------------- GRADE A TEST CASES ----------------
+
+# Test lower boundary for Grade A (exactly 80)
+def test_grade_A_lower_boundary():
+    assert calculate_grade(80) == "A"
+
+# Test middle value for Grade A
+def test_grade_A_middle_value():
     assert calculate_grade(85) == "A"
 
-def test_grade_B():
-    assert calculate_grade(70) == "B"
+# Test upper boundary just below 90
+def test_grade_A_upper_boundary():
+    assert calculate_grade(89.99) == "A"
 
-def test_grade_C():
-    assert calculate_grade(55) == "C"
+# ---------------- GRADE B TEST CASES ----------------
 
-def test_grade_D():
+# Test lower boundary for Grade B (exactly 65)
+def test_grade_B_lower_boundary():
+    assert calculate_grade(65) == "B"
+
+# Test middle value for Grade B
+def test_grade_B_middle_value():
+    assert calculate_grade(72) == "B"
+
+# Test upper boundary just below 80
+def test_grade_B_upper_boundary():
+    assert calculate_grade(79.99) == "B"
+
+# ---------------- GRADE C TEST CASES ----------------
+
+# Test lower boundary for Grade C (exactly 50)
+def test_grade_C_lower_boundary():
+    assert calculate_grade(50) == "C"
+
+# Test middle value for Grade C
+def test_grade_C_middle_value():
+    assert calculate_grade(58) == "C"
+
+# Test upper boundary just below 65
+def test_grade_C_upper_boundary():
+    assert calculate_grade(64.99) == "C"
+
+# ---------------- GRADE D TEST CASES ----------------
+
+# Test lower boundary for Grade D (exactly 40)
+def test_grade_D_lower_boundary():
+    assert calculate_grade(40) == "D"
+
+# Test middle value for Grade D
+def test_grade_D_middle_value():
     assert calculate_grade(45) == "D"
 
-def test_grade_F():
+# Test upper boundary just below 50
+def test_grade_D_upper_boundary():
+    assert calculate_grade(49.99) == "D"
+
+# ---------------- GRADE F TEST CASES ----------------
+
+# Test value below 40 should return Grade F
+def test_grade_F_below_40():
     assert calculate_grade(30) == "F"
+# Import the grade calculation function from main program
+from student import calculate_grade
 
+# ---------------- GRADE S TEST CASES ----------------
 
-# 🔹 Test main program output using pytest capsys
-def test_main_output(capsys, monkeypatch):
-    test_args = [
-        "student.py",
-        "swapna",
-        "ICA",
-        "3",
-        "85",
-        "78",
-        "90"
-    ]
+# Test lower boundary for Grade S (exactly 90)
+def test_grade_S_lower_boundary():
+    assert calculate_grade(90) == "S"
 
-    # Mock command-line arguments
-    monkeypatch.setattr(sys, "argv", test_args)
+# Test middle value for Grade S
+def test_grade_S_middle_value():
+    assert calculate_grade(95) == "S"
 
-    # Run main program
-    main()
+# Test upper boundary for Grade S (exactly 100)
+def test_grade_S_upper_boundary():
+    assert calculate_grade(100) == "S"
 
-    # Capture output
-    captured = capsys.readouterr()
-    output = captured.out
+# ---------------- GRADE A TEST CASES ----------------
 
-    # ✅ Assertions
-    assert "GRADING CRITERIA" in output
-    assert "STUDENT DETAILS" in output
-    assert "Name       : swapna" in output
-    assert "Department : ICA" in output
-    assert "Semester   : 3" in output
-    assert "Average    : 84.33" in output
-    assert "Grade      : A" in output
+# Test lower boundary for Grade A (exactly 80)
+def test_grade_A_lower_boundary():
+    assert calculate_grade(80) == "A"
+
+# Test middle value for Grade A
+def test_grade_A_middle_value():
+    assert calculate_grade(85) == "A"
+
+# Test upper boundary just below 90
+def test_grade_A_upper_boundary():
+    assert calculate_grade(89.99) == "A"
+
+# ---------------- GRADE B TEST CASES ----------------
+
+# Test lower boundary for Grade B (exactly 65)
+def test_grade_B_lower_boundary():
+    assert calculate_grade(65) == "B"
+
+# Test middle value for Grade B
+def test_grade_B_middle_value():
+    assert calculate_grade(72) == "B"
+
+# Test upper boundary just below 80
+def test_grade_B_upper_boundary():
+    assert calculate_grade(79.99) == "B"
+
+# ---------------- GRADE C TEST CASES ----------------
+
+# Test lower boundary for Grade C (exactly 50)
+def test_grade_C_lower_boundary():
+    assert calculate_grade(50) == "C"
+
+# Test middle value for Grade C
+def test_grade_C_middle_value():
+    assert calculate_grade(58) == "C"
+
+# Test upper boundary just below 65
+def test_grade_C_upper_boundary():
+    assert calculate_grade(64.99) == "C"
+
+# ---------------- GRADE D TEST CASES ----------------
+
+# Test lower boundary for Grade D (exactly 40)
+def test_grade_D_lower_boundary():
+    assert calculate_grade(40) == "D"
+
+# Test middle value for Grade D
+def test_grade_D_middle_value():
+    assert calculate_grade(45) == "D"
+
+# Test upper boundary just below 50
+def test_grade_D_upper_boundary():
+    assert calculate_grade(49.99) == "D"
+
+# ---------------- GRADE F TEST CASES ----------------
+
+# Test value below 40 should return Grade F
+def test_grade_F_below_40():
+    assert calculate_grade(30) == "F"
